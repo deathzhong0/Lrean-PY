@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+
+#int() 函数用于将一个字符串或数字转换为整型。class int(x, base=10),x -- 字符串或数字。base -- 进制数，默认十进制。
+print(int('123456',base=16))
+
+def int2(x,base=2):
+    return int(x,base)
+
+#functools.partial就是帮助我们创建一个偏函数的，不需要我们自己定义int2()，可以直接使用下面的代码创建一个新的函数int2：
+import functools
+int1 = functools.partial(int,base=2)
+print(int1('110'))
+print(int1('110',base=8))
+
+#实际上会把10作为*args的一部分自动加到左边，也就是：
+max2 = functools.partial(max,10)
+print(max2(1,5,3))

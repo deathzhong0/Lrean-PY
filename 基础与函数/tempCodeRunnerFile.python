@@ -1,0 +1,3 @@
+x = input("输入x的值")
+y = input("输入y的值")
+print("x*y=",x*y)

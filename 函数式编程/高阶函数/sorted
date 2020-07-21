@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+
+#sorted(iterable, cmp=None, key=None, reverse=False)
+'''
+参数说明：
+iterable -- 可迭代对象。
+cmp -- 比较的函数，这个具有两个参数，参数的值都是从可迭代对象中取出，此函数必须遵守的规则为，大于则返回1，小于则返回-1，等于则返回0。
+key -- 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。
+reverse -- 排序规则，reverse = True 降序 ， reverse = False 升序（默认）。
+'''
+
+#Python内置的sorted()函数就可以对list进行排序：
+print(sorted([-5,-2,-6,5,4]))
+#此外，sorted()函数也是一个高阶函数，它还可以接收一个key函数来实现自定义的排序，例如按绝对值大小排序：
+print(sorted([-5,-10,-5,8],key=abs))    #abs是绝对值函数
+print(sorted(['-5','a','e','c','d','A']))   #由于'Z' < 'a'，结果，大写字母Z会排在小写字母a的前面
+
+print(sorted(['-5','as','ed','cv','dg','Ah'],key=str.lower) )
+
+print(sorted(['-5','as','ed','cv','dg','Ah'],key=str.lower,reverse=True) )
+
+
+#练习
+'''
+假设我们用一组tuple表示学生名字和成绩：
+
+L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
+请用sorted()对上述列表分别按名字排序：
+'''
+
+L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
+def by_name(t):
+    return t[0]
+
+L2 = sorted(L, key=by_name)
+print(L2)
+
+#再按成绩从高到低排序：
+
+def by_score(t):
+    return -t[1]
+
+
+L2 = sorted(L, key=by_score)
+print(L2)

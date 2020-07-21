@@ -1,0 +1,105 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+def f(x):
+    return x * x
+
+r = map(f,range(11))  
+#map()传入的第一个参数是f，即函数对象本身。
+#由于结果r是一个Iterator，Iterator是惰性序列，因此通过list()函数让它把整个序列都计算出来并返回一个list。
+print(list(r))
+
+print(list(map(str,range(11))))     #转化为字符串
+
+from functools import reduce
+def add(x,y):
+    return x*y
+
+r = reduce(add,[1,2,3,4])
+print(r)
+
+#reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+
+def fu(x,y):
+    return x*10+y
+
+r = reduce(fu,[1,2,3,4,5])
+
+print(r)
+
+#把str转换为int的函数：
+
+def fn(x,y):
+    return x*10+y
+
+def char2num(s):
+    digits = {'0':0,'1':1,'2':2,'3':3,'4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
+    return digits[s]
+
+print(reduce(fn,map(char2num,'123'))) 
+
+print('-'*50)
+
+#上面函数等同于下面的函数
+
+digits1 = {'0':0,'1':1,'2':2,'3':3,'4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
+def char2num1(s):
+    return digits1[s]
+
+def str2int(s):
+    return reduce(lambda x,y:x*10+y,map(char2num1,s))   #lambda是匿名函数，可以不用特定起一个函数名称
+
+print(str2int('123465'))
+
+#利用map()函数，把用户输入的不规范的英文名字，变为首字母大写，其他小写的规范名字。
+# 输入：['adam', 'LISA', 'barT']，输出：['Adam', 'Lisa', 'Bart']：
+def normalize(name):
+    return name.lower()[0].upper() + name.lower()[1:]
+  
+    
+
+# 测试:
+L1 = ['adam', 'LISA', 'barT']
+L2 = list(map(normalize, L1))
+print(L2)
+
+#Python提供的sum()函数可以接受一个list并求和，请编写一个prod()函数，可以接受一个list并利用reduce()求积：
+def prod(L):
+    return reduce(gg,L)
+
+def gg(x,y):
+    return x*y
+
+#测试
+print('3 * 5 * 7 * 9 =', prod([3, 5, 7, 9]))
+if prod([3, 5, 7, 9]) == 945:
+    print('测试成功!')
+else:
+    print('测试失败!')
+print('-'*50)
+
+#利用map和reduce编写一个str2float函数，把字符串'123.456'转换成浮点数123.456：
+def str2float(s):
+    i = s.index('.')
+    return reduce(lambda x,y:x*10+y,map(zhuanghua,s[0:i])) + reduce(lambda x,y:x*10+y,map(zhuanghua,s[i+1:]))*(0.1**len(s[i+1:]))
+
+dict1 = {'0':0,'1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'.':'.'}
+
+def zhuanghua(z):
+    return dict1[z]
+    
+def gongshi1(x,y):
+    return x*10+y
+
+def gongshi2(x,y):
+
+    return (x*10+y)/0.01
+        
+    
+
+
+#测试
+print('str2float(\'123.456\') =', str2float('123.456'))
+if abs(str2float('123.456') - 123.456) < 0.00001:
+    print('测试成功!')
+else:
+    print('测试失败!')

@@ -1,0 +1,74 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+class Student(object):
+    def get_score(self):
+        return self._score
+
+    def set_score(self, score):
+        if not isinstance(score, int):
+            raise ValueError("cuo")
+        if score > 100 or score < 0:
+            raise ValueError("cuo2")
+        self._score = score
+
+
+s1 = Student()
+s1.set_score(99)
+s1.get_score()
+
+#Python内置的@property装饰器就是负责把一个方法变成属性调用的：
+
+
+class Student1(object):
+    
+    @property
+    def score1(self):
+        return self._score1
+    
+    @score1.setter
+    def score1(self, value):
+        if not isinstance(value, int):
+            raise ValueError('int cuo')
+        if value > 100 or value < 0:
+            raise ValueError('1~100 cuo')
+        self._score1 = value
+        
+s2 = Student1()
+s2.score1= 99  #实际转化为s.set_score(60),不是s2.score1（90）
+print(s2.score1)
+
+#练习
+
+#请利用@property给一个Screen对象加上width和height属性，以及一个只读属性resolution：
+class Screen(object):
+    
+    @property
+    def resolution(self):
+        return self._width * self._height
+
+    @property
+    def width(self):
+        return self._width
+
+    @width.setter
+    def width(self,width):
+        self._width = width
+
+    @property
+    def height(self):
+        return self._height
+
+    @height.setter
+    def height(self,height):
+        self._height = height
+
+
+# 测试:
+s = Screen()
+s.width = 1024
+s.height = 768
+print('resolution =', s.resolution)
+if s.resolution == 786432:
+    print('测试通过!')
+else:
+    print('测试失败!')

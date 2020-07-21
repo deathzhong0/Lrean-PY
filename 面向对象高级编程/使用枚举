@@ -1,0 +1,65 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+#更好的方法是为这样的枚举类型定义一个class类型，然后，每个常量都是class的一个唯一实例。
+# Python提供了Enum类来实现这个功能：
+from enum import Enum
+Month = Enum('Month1',('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Seq','Oct','Nov','Dec'))
+Month.Oct
+#上面等同于下面
+class Month2(Enum):
+    Jan = 1
+    Feb = 2
+    Mar = 3
+    Apr = 4
+    May = 5
+    Jun = 6
+    Jul = 7
+    Aug = 8
+    Seq = 9
+    Oct = 10
+    Nov = 11
+    Dec = 12
+
+
+for name,member in Month2.__members__.items():
+    print(name,'=>',member,',',member.value)
+
+for a1 in Month2.__members__:    #列遍所有Month1的所有成员
+    print(a1)
+
+for a2 in Month.__members__.items():    #遍历Month1成员的元组数组。用逗号隔开键与值
+    print(a2)
+
+from enum import Enum,unique
+
+@unique                 #@unique装饰器可以帮助我们检查保证没有重复值。
+class Weekday(Enum):
+    sun = 0
+    mon = 1
+    tue = 2
+    wed = 3
+    thu = 4
+    fri = 5
+    sat = 6
+
+day1 = Weekday.mon
+print(day1)
+
+#练习
+#把Student的gender属性改造为枚举类型，可以避免使用字符串：
+class Gender(Enum):
+    Male = 0
+    Female = 1
+
+class Student(object):
+    def __init__(self, name, gender):
+        self.name = name
+        self.gender = gender
+
+# 测试:
+bart = Student('Bart', Gender.Male)
+if bart.gender == Gender.Male:
+    print('测试通过!')
+else:
+    print('测试失败!')

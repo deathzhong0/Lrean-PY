@@ -1,0 +1,19 @@
+# -*- coding: utf-8 -*-
+def fact(n):        #每次循环计算会多一个栈，如果计算数量多会报错
+    if n == 1:
+        return n
+    else:
+        return fact(n-1) * n  #把函数带到下一次循环进行计算，直到n变为1为止
+
+print(fact(10))
+
+
+#请编写move(n, a, b, c)函数，它接收参数n，表示3个柱子A、B、C中第1个柱子A的盘子数量，然后打印出把所有盘子从A借助B移动到C的方法，例如：
+def move(n,a,b,c):
+    if n == 1:
+        print(a,'-->',c)
+    else:
+        move(n-1,a,c,b)
+        print(a,'-->',c)
+        move(n-1,b,a,c)
+print(move(3,'A','B','C'))

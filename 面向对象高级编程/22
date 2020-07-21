@@ -1,0 +1,17 @@
+class Student1(object):
+
+    @property
+    def score1(self):
+        return self._score1
+
+    @score1.setter
+    def score1(self, value):
+        if not isinstance(value, int):
+            raise ValueError('score must be an integer!')
+        if value < 0 or value > 100:
+            raise ValueError('score must between 0 ~ 100!')
+        self._score1 = value
+
+s2 = Student1()
+s2.score1 = 60 # OK，实际转化为s.set_score(60)
+print(s2.score1) # OK，实际转化为s.get_score()

@@ -1,0 +1,26 @@
+#!/usr/bin/env python 
+# -*- coding: utf-8 -*-
+
+class Student(object):
+    #为了达到限制的目的，Python允许在定义class的时候，定义一个特殊的__slots__变量，来限制该class实例能添加的属性：
+    __slots__ = ('name','age')  
+
+
+s = Student()
+s.name = 'DZ'
+s.score = 99
+#由于'score'没有被放到__slots__中，所以不能绑定score属性，试图绑定score将得到AttributeError的错误。
+
+#使用__slots__要注意，__slots__定义的属性仅对当前类实例起作用，对继承的子类是不起作用的：
+class xxx(Student):
+    pass
+
+x = xxx()
+x.score = 9999
+
+
+from types import MethodType
+
+s1.set_age = MethodType(set_age,s1,)
+s1.set_age(23)
+s1.age

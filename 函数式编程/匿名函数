@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+print(list(map(lambda x: x * x, [1, 2, 3, 4, 5])))
+
+
+#匿名函数lambda x: x * x实际上就是：
+def f(x):
+    return x * x
+
+
+#关键字lambda表示匿名函数，冒号前面的x表示函数参数。
+
+#同样，也可以把匿名函数作为返回值返回，比如：
+
+
+def build(x, y):
+    return lambda: x * x + y * y
+
+
+#请用匿名函数改造下面的代码：
+'''
+def is_odd(n):
+    return n % 2 == 1
+
+L = list(filter(is_odd, range(1, 20)))
+'''
+L = list(filter(lambda n:n % 2 == 1,range(1,20)))
+print(L)
